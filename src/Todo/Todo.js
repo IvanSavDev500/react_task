@@ -2,6 +2,7 @@ import React, { useReducer, useEffect } from 'react';
 import styles from './Todo.module.css';
 import AddTodo from "../AddTodo/AddTodo";
 import TodoItem from './TodoItem/TodoItem';
+import { ADD_TODO, CHANGE_NAME, CHANGE_COMPLETED, DELETE_TODO } from "../Consts/Consts";
 
 const getInitialState = () => {
     const todos = localStorage.getItem('todos');
@@ -10,7 +11,7 @@ const getInitialState = () => {
 
 const reducer = (state, {type, action}) => {
     switch (type) {
-        case 'ADD_TODO':
+        case ADD_TODO:
             return [
                 ...state,
                 {
@@ -19,17 +20,17 @@ const reducer = (state, {type, action}) => {
                     complete: false,
                 }
             ];
-        case 'CHANGE_NAME':
+        case CHANGE_NAME:
             return state.map((todo) => ({
                 ...todo,
                 name: action.id === todo.id ? action.name : todo.name
             }))
-        case 'CHANGE_COMPLETED':
+        case CHANGE_COMPLETED:
             return state.map((todo) => ({
                 ...todo,
                 complete: action.id === todo.id ? !todo.complete : todo.complete
             }))
-        case 'DELETE_TODO':
+        case DELETE_TODO:
             return state.filter((todo) => todo.id !== action.id);
         default:
             return state;

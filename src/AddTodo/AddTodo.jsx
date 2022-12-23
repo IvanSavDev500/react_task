@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styles from './AddTodo.module.css'
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField} from "@mui/material";
+import { ADD_TODO } from "../Consts/Consts";
 
 function AddTodo({ dispatch }) {
     const [open, setOpen] = useState(false);
@@ -19,7 +20,7 @@ function AddTodo({ dispatch }) {
         setNameTodo(name);
     };
     const handleAddTodo = () => {
-        dispatch({type: 'ADD_TODO', action: {id: nameTodo + Math.random(), name: nameTodo}})
+        dispatch({type: ADD_TODO, action: {id: nameTodo + Math.random(), name: nameTodo}})
         handleClose();
     };
 
