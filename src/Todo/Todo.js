@@ -1,8 +1,9 @@
 import React, { useReducer, useEffect } from 'react';
-import styles from './Todo.module.css';
 import AddTodo from "../AddTodo/AddTodo";
 import TodoItem from './TodoItem/TodoItem';
 import { ADD_TODO, CHANGE_NAME, CHANGE_COMPLETED, DELETE_TODO } from "../Consts/Consts";
+
+import styles from './Todo.module.css';
 
 const getInitialState = () => {
     const todos = localStorage.getItem('todos');

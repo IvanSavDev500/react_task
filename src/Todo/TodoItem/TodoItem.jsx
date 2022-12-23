@@ -15,6 +15,7 @@ function TodoItem({children, id, complete, dispatch}) {
             ref.current.focus();
         }
     }, [editable]);
+
     const deleteTodo = (id) => ({type: DELETE_TODO, action: {id}});
     const changeCompletedTodo = (id) => ({type: CHANGE_COMPLETED, action: {id}});
     const changeNameTodo = (id, name) => ({type: CHANGE_NAME, action: {id, name}});
