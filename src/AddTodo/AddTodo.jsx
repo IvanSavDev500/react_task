@@ -19,6 +19,7 @@ function AddTodo({ dispatch }) {
         const name = event.target.value;
         setNameTodo(name);
     };
+
     const handleAddTodo = () => {
         dispatch({type: ADD_TODO, action: {id: nameTodo + Math.random(), name: nameTodo}})
         handleClose();
