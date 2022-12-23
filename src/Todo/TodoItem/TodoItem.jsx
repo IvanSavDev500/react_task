@@ -4,13 +4,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import styles from './TodoItem.module.css';
 import CreateIcon from "@mui/icons-material/Create";
 import CloseIcon from '@mui/icons-material/Close';
+import { DELETE_TODO, CHANGE_COMPLETED, CHANGE_NAME } from "../../Consts/Consts";
 
 function TodoItem({children, id, complete, dispatch}) {
     const [editable, setEditable] = useState(false);
     const ref = useRef();
-    const deleteTodo = (id) => ({type: 'DELETE_TODO', action: {id}});
-    const changeCompletedTodo = (id) => ({type: 'CHANGE_COMPLETED', action: {id}});
-    const changeNameTodo = (id, name) => ({type: "CHANGE_NAME", action: {id, name}})
+    const deleteTodo = (id) => ({type: DELETE_TODO, action: {id}});
+    const changeCompletedTodo = (id) => ({type: CHANGE_COMPLETED, action: {id}});
+    const changeNameTodo = (id, name) => ({type: CHANGE_NAME, action: {id, name}})
 
     useEffect(() => {
         if (editable && ref.current) {
