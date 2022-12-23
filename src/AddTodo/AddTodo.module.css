@@ -1,0 +1,7 @@
+.addTodo {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    max-width: 70%;
+    margin-bottom: 15px;
+}

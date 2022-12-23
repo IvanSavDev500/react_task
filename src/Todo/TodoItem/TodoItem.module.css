@@ -1,0 +1,14 @@
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 80%;
+}
+
+.complete {
+    text-decoration: line-through;
+}
+
+.checkbox {
+    margin-right: 10px;
+}

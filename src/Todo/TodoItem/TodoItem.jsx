@@ -1,0 +1,57 @@
+import React, {useState, useRef, useEffect} from 'react';
+import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import styles from './TodoItem.module.css';
+import CreateIcon from "@mui/icons-material/Create";
+import CloseIcon from '@mui/icons-material/Close';
+
+function TodoItem({children, id, complete, dispatch}) {
+    const [editable, setEditable] = useState(false);
+    const ref = useRef();
+    const deleteTodo = (id) => ({type: 'DELETE_TODO', action: {id}});
+    const changeCompletedTodo = (id) => ({type: 'CHANGE_COMPLETED', action: {id}});
+    const changeNameTodo = (id, name) => ({type: "CHANGE_NAME", action: {id, name}})
+
+    useEffect(() => {
+        if (editable && ref.current) {
+            ref.current.focus();
+        }
+    }, [editable]);
+
+    return (
+        <li className={styles.item}>
+            <input className={styles.checkbox} id={id} type="checkbox" onChange={(event) => {
+                if (editable) {
+                    event.preventDefault();
+                    return;
+                }
+                dispatch(changeCompletedTodo(id));
+            }} />
+            <label
+                className={complete ? styles.complete : ''}
+                contentEditable={editable}
+                ref={ref}
+                htmlFor={id}
+                onClick={(event) => {
+                    if (editable) {
+                        event.preventDefault()
+                    }
+                }
+            }>{children}</label>
+            <IconButton aria-label="delete" color="primary" onClick={() => {
+                if (editable) {
+                    const newName = ref.current.textContent;
+                    dispatch(changeNameTodo(id, newName));
+                }
+                setEditable(prevState => !prevState);
+            }}>
+                {editable ? <CloseIcon /> : <CreateIcon />}
+            </IconButton>
+            <IconButton aria-label="delete" color="primary" onClick={() => dispatch(deleteTodo(id))}>
+                <DeleteIcon />
+            </IconButton>
+        </li>
+    );
+}
+
+export default TodoItem;
